@@ -1,10 +1,17 @@
 package com.example.apfinals;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DownloadManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.telecom.Call;
+import android.view.View;
+import android.view.textclassifier.TextLinks;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -20,63 +27,86 @@ import java.util.HashMap;
 public class CarListActivity extends AppCompatActivity {
     private ListView listView;
     private ArrayList<Car> data = new ArrayList<>();
+    private OkHttpClient okHttpClient = new OkHttpClient();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_car_list);
-        findViews();
-        ArrayList<HashMap<String,String>> carList = new ArrayList<HashMap<String, String>>();
+        getDataFromAPI();
+    }
 
-        try {
-            JSONObject obj = new JSONObject(loadJSONFromAsset());
-            JSONArray jsonArray = obj.getJSONArray("cars");
-            HashMap<String, String> hashMap;
-
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                String brand = jsonObject.getString("brand");
-                String model = jsonObject.getString("model");
-                String variant = jsonObject.getString("variant");
-                double pricePM = jsonObject.getDouble("pricePM");
-                double priceEM = jsonObject.getDouble("priceEM");
-                double priceLabuan = jsonObject.getDouble("priceLabuan");
-                double priceLangkawi = jsonObject.getDouble("priceLangkawi");
-
-                hashMap = new HashMap<String, String>();
-                hashMap.put("brand", brand);
-                hashMap.put("model", model);
-                hashMap.put("variant", variant);
-                hashMap.put("pricePM", Double.toString(pricePM));
-                hashMap.put("priceEM", Double.toString(priceEM));
-                hashMap.put("priceLabuan", Double.toString(priceLabuan));
-                hashMap.put("priceLangkawi", Double.toString(priceLangkawi));
-
-                data.add(hashMap);
+    private void initialize(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                findViews();
+                setListeners();
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        });
     }
 
     private void findViews(){
         listView = findViewById(R.id.listview);
+
+        CarAdapter adapter = new CarAdapter(this,data);
+        listView.setAdapter(adapter);
     }
 
-    public String loadJSONFromAsset() {
-        String json;
-        try {
-            InputStream is = (CarListActivity.this).getAssets().open("brand_price.json");
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, "UTF-8");
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-        return json;
+    private void setListeners(){
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Car selectedItem = (Car) listView.getAdapter().getItem(position);
+
+                Intent i = new Intent(CarListActivity.this,CarDetailActivity.class);
+                i.putExtra("brand",selectedItem.getBrand());
+                i.putExtra("model",selectedItem.getModel());
+                i.putExtra("variant",selectedItem.getVariant());
+                i.putExtra("pricePM",selectedItem.getPricePm());
+                i.putExtra("priceEM",selectedItem.getPriceEm());
+                i.putExtra("priceLabuan",selectedItem.getPriceLabuan());
+                i.putExtra("priceLangkawi",selectedItem.getPriceLangkawi());
+                startActivity(i);
+            }
+        });
     }
 
+    private void getDataFromAPI(){
+        Request request = new Request.Builder().url("https://api.myjson.com/bins/13e1kk").build();
+
+        okHttpClient.newCall(request).enqueue(new Callback(){
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e){
+
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException{
+                try {
+                    JSONObject dataObject = new JSONObject(response.body().string());
+
+                    JSONArray dataArray = dataObject.getJSONArray("cars");
+
+                    for(int i =0; i < dataArray.length(); i++){
+                        JSONObject singleObject = dataArray.getJSONObject(i);
+
+                        Car model = new Car();
+                        model.setBrand(singleObject.getString("brand"));
+                        model.setModel(singleObject.getString("model"));
+                        model.setVariant(singleObject.getString("variant"));
+                        model.setPricePm(singleObject.getDouble("pricePM"));
+                        model.setPriceEm(singleObject.getDouble("priceEM"));
+                        model.setPriceLabuan(singleObject.getDouble("priceLabuan"));
+                        model.setPriceLangkawi(singleObject.getDouble("priceLangkawi"));
+
+                        data.add(model);
+                    }
+                    initialize();
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 }
