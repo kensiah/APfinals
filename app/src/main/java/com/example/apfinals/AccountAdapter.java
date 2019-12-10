@@ -45,7 +45,7 @@ public class AccountAdapter extends ArrayAdapter {
             holder = new Viewholder();
             v = LayoutInflater.from(context).inflate(R.layout.activity_login,null);
 
-            holder.editUsername = v.findViewById(R.id.edit_username);
+            holder.editId = v.findViewById(R.id.edit_id);
             holder.editPassword = v.findViewById(R.id.edit_password);
 
             v.setTag(holder);
@@ -57,13 +57,13 @@ public class AccountAdapter extends ArrayAdapter {
 
         Account model = (Account)getItem(position);
 
-        holder.editUsername.setText(model.getUsername());
+        holder.editId.setText(model.getUsername());
         holder.editPassword.setText(model.getPassword());
 
         return v;
     }
 
     class Viewholder{
-        EditText editUsername,editPassword;
+        EditText editId,editPassword;
     }
 }
