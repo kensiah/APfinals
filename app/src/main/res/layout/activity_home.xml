@@ -9,9 +9,14 @@
     android:gravity="center">
 
     <TextView
+        android:id="@+id/tv_username"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Car brands avaiable to rent"
+        android:textSize="20sp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Welcome To Proton Car Sales App"
         android:textSize="25sp"/>
 
 

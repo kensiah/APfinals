@@ -13,9 +13,9 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
-    private String username,password;
-    private EditText editUsername,editPassword;
-    private Button btnLogin,btnRegister;
+    private String id,password;
+    private EditText editId,editPassword;
+    private Button btnLogin;
     private AccountDBHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,21 +27,20 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void findViews(){
-        editUsername = findViewById(R.id.edit_username);
+        editId = findViewById(R.id.edit_id);
         editPassword = findViewById(R.id.edit_password);
         btnLogin = findViewById(R.id.btn_login);
-        btnRegister = findViewById(R.id.btn_register);
     }
 
     private void setListeners(){
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                username = "kensiah";
+                id = "kensiah";
                 password = "kensiah123";
-                String inputUsername = editUsername.getText().toString();
+                String inputId = editId.getText().toString();
                 String inputPassword = editPassword.getText().toString();
-                if(inputUsername.equals(username) && inputPassword.equals(password)){
+                if(inputId.equals(id) && inputPassword.equals(password)){
                     Intent i = new Intent(LoginActivity.this,HomeActivity.class);
                     startActivity(i);
                 }else{
@@ -50,27 +49,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        btnRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(!editUsername.getText().toString().isEmpty() &&
-                !editPassword.getText().toString().isEmpty()){
-                    AccountDBHelper dbHelper = new AccountDBHelper(LoginActivity.this);
-                    Account account = new Account();
-                    account.setUsername(editUsername.getText().toString());
-                    account.setPassword(editPassword.getText().toString());
-                    dbHelper.insertAccount(account);
-                }else{
-                    if(editUsername.getText().toString().isEmpty()){
-                        editUsername.setError("Cannot be empty");
-                    }
-
-                    if(editPassword.getText().toString().isEmpty()){
-                        editPassword.setError("Cannot be empty");
-                    }
-                }
-            }
-        });
     }
 
     private void setUpDatabase(){
