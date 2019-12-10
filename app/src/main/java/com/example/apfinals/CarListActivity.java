@@ -41,16 +41,6 @@ public class CarListActivity extends AppCompatActivity {
         getDataFromAPI();
     }
 
-    private void initialize(){
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                findViews();
-                setListeners();
-            }
-        });
-    }
-
     private void findViews(){
         listView = findViewById(R.id.listview);
 
@@ -73,6 +63,16 @@ public class CarListActivity extends AppCompatActivity {
                 i.putExtra("priceLabuan",selectedItem.getPriceLabuan());
                 i.putExtra("priceLangkawi",selectedItem.getPriceLangkawi());
                 startActivity(i);
+            }
+        });
+    }
+
+    private void initialize(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                findViews();
+                setListeners();
             }
         });
     }
