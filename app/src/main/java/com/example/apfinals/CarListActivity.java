@@ -1,27 +1,31 @@
 package com.example.apfinals;
 
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.DownloadManager;
-import android.content.Context;
+
 import android.content.Intent;
-import android.content.res.AssetManager;
+
 import android.os.Bundle;
 import android.telecom.Call;
 import android.view.View;
-import android.view.textclassifier.TextLinks;
+
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+
 import org.json.JSONArray;
-import org.json.JSONException;
+
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.io.InputStream;
+
 import java.util.ArrayList;
-import java.util.HashMap;
+
 
 
 public class CarListActivity extends AppCompatActivity {
@@ -77,12 +81,12 @@ public class CarListActivity extends AppCompatActivity {
 
         okHttpClient.newCall(request).enqueue(new Callback(){
             @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e){
+            public void onFailure(Request request, IOException e) {
 
             }
 
             @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException{
+            public void onResponse(Response response) throws IOException {
                 try {
                     JSONObject dataObject = new JSONObject(response.body().string());
 
