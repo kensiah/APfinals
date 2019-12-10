@@ -37,20 +37,34 @@ public class CarListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_car_list);
         findViews();
         ArrayList<HashMap<String,String>> carList = new ArrayList<HashMap<String, String>>();
-        Context context = null;
-        try{
-            String jsonLocation = AssetJSONFile("brand_price.json",context);
-            JSONObject carArray = (new JSONObject()).getJSONObject("cars");
-            String brand = carArray.getString("brand");
-            String model = carArray.getString("model");
-            String variant = carArray.getString("variant");
-            double pricePM = carArray.getDouble("pricePM");
-            double priceEM = carArray.getDouble("priceEM");
-            double priceLabuan = carArray.getDouble("priceLabuan");
-            double priceLangkawi = carArray.getDouble("priceLangkawi");
-        }catch(IOException e){
-            e.printStackTrace();
-        }catch (JSONException e){
+
+        try {
+            JSONObject obj = new JSONObject(loadJSONFromAsset());
+            JSONArray jsonArray = obj.getJSONArray("cars");
+            HashMap<String, String> hashMap;
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                String brand = jsonObject.getString("brand");
+                String model = jsonObject.getString("model");
+                String variant = jsonObject.getString("variant");
+                double pricePM = jsonObject.getDouble("pricePM");
+                double priceEM = jsonObject.getDouble("priceEM");
+                double priceLabuan = jsonObject.getDouble("priceLabuan");
+                double priceLangkawi = jsonObject.getDouble("priceLangkawi");
+
+                hashMap = new HashMap<String, String>();
+                hashMap.put("brand", brand);
+                hashMap.put("model", model);
+                hashMap.put("variant", variant);
+                hashMap.put("pricePM", Double.toString(pricePM));
+                hashMap.put("priceEM", Double.toString(priceEM));
+                hashMap.put("priceLabuan", Double.toString(priceLabuan));
+                hashMap.put("priceLangkawi", Double.toString(priceLangkawi));
+
+                carList.add(hashMap);
+            }
+        } catch (JSONException e) {
             e.printStackTrace();
         }
     }
@@ -59,5 +73,20 @@ public class CarListActivity extends AppCompatActivity {
         listView = findViewById(R.id.listview);
     }
 
+    public String loadJSONFromAsset() {
+        String json;
+        try {
+            InputStream is = (CarListActivity.this).getAssets().open("brand_price.json");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return json;
+    }
 
 }

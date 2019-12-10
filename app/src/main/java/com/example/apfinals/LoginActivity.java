@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
                 String inputId = editId.getText().toString();
                 String inputPassword = editPassword.getText().toString();
                 if(inputId.equals(id) && inputPassword.equals(password)){
-                    Intent i = new Intent(LoginActivity.this,HomeActivity.class);
+                    Intent i = new Intent(LoginActivity.this,CarListActivity.class);
                     startActivity(i);
                 }else{
                     Toast.makeText(LoginActivity.this,"Invalid Login",Toast.LENGTH_SHORT).show();
