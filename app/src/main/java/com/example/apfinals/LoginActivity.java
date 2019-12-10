@@ -16,14 +16,12 @@ public class LoginActivity extends AppCompatActivity {
     private String id,password;
     private EditText editId,editPassword;
     private Button btnLogin;
-    private AccountDBHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         findViews();
         setListeners();
-        setUpDatabase();
     }
 
     private void findViews(){
@@ -48,17 +46,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-
-    }
-
-    private void setUpDatabase(){
-        dbHelper = new AccountDBHelper(this);
-    }
-
-    private void setUpAdapter(){
-        ArrayList<Account> accountList = new ArrayList<>();
-        accountList = dbHelper.getAllAccounts();
-
 
     }
 
