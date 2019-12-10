@@ -1,53 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:gravity="center"
     android:padding="10dp">
 
     <TextView
-        android:id="@+id/tv_model"
-        android:layout_width="150dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:text="X70"
-        android:textSize="22sp" />
+        android:text="Select to see more details of the car:"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+        <TextView
+            android:id="@+id/tv_x70"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:text="X70"
+            android:textSize="22sp" />
+
+        <ImageView
+            android:id="@+id/img_x70"
+            android:layout_width="wrap_content"
+            android:layout_height="75dp"
+            android:src="@drawable/x70"/>
+    </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp">
         <TextView
-            android:id="@+id/tv_variant"
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_saga"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:text="Executive 2WD" />
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:text="SAGA"
+            android:textSize="22sp" />
 
-        <TextView
-            android:id="@+id/tv_pricePM"
+        <ImageView
+            android:id="@+id/img_saga"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="109,800.00" />
-
-        <TextView
-            android:id="@+id/tv_priceEM"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="109,800.00" />
-
-        <TextView
-            android:id="@+id/tv_priceLabuan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="93,783.00" />
-
-        <TextView
-            android:id="@+id/tv_priceLangkawi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="94,154.00" />
-
+            android:layout_height="75dp"
+            android:src="@drawable/saga"/>
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp">
+        <TextView
+            android:id="@+id/tv_persona"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:text="PERSONA"
+            android:textSize="22sp" />
+
+        <ImageView
+            android:id="@+id/img_persona"
+            android:layout_width="wrap_content"
+            android:layout_height="75dp"
+            android:src="@drawable/persona"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp">
+        <TextView
+            android:id="@+id/tv_iriz"
+            android:layout_width="150dp"
+            android:layout_height="75dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:text="IRIZ"
+            android:textSize="22sp" />
+
+        <ImageView
+            android:id="@+id/img_iriz"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/iriz"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp">
+        <TextView
+            android:id="@+id/tv_exora"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:text="EXORA"
+            android:textSize="22sp" />
+
+        <ImageView
+            android:id="@+id/img_exora"
+            android:layout_width="wrap_content"
+            android:layout_height="75dp"
+            android:src="@drawable/exora"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp">
+        <TextView
+            android:id="@+id/tv_perdana"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:text="PERDANA"
+            android:textSize="22sp" />
+
+        <ImageView
+            android:id="@+id/img_perdana"
+            android:layout_width="wrap_content"
+            android:layout_height="75dp"
+            android:src="@drawable/perdana"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp">
+        <TextView
+            android:id="@+id/tv_preve"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:text="PREVE"
+            android:textSize="22sp" />
+
+        <ImageView
+            android:id="@+id/img_preve"
+            android:layout_width="wrap_content"
+            android:layout_height="75dp"
+            android:src="@drawable/preve"/>
+    </LinearLayout>
+
 </LinearLayout>
+
