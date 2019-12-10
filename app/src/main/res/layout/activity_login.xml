@@ -21,7 +21,8 @@
         android:text="Welcome To Car Rental System!"
         android:textSize="20sp"
         android:textColor="@android:color/white"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:layout_marginTop="50dp"/>
 
     <ImageView
         android:layout_width="wrap_content"
@@ -49,11 +50,24 @@
         android:backgroundTint="@android:color/white"
         android:inputType="textPassword"/>
 
-    <Button
-        android:id="@+id/btn_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Login"
-        android:textStyle="bold" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:textStyle="bold" />
+
+         <Button
+             android:id="@+id/btn_register"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="Register"
+             android:textStyle="bold"/>
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
