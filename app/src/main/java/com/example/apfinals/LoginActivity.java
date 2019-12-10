@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Request request = new Request.Builder()
-                        .url("https://api.myjson.com/bins/tr904\n")
+                        .url("https://api.myjson.com/bins/tr904")
                         .build();
 
                 okHttpClient.newCall(request)
@@ -71,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
                                                 startActivity(i);
                                                 finish();
                                             }else{
-                                                Toast.makeText(LoginActivity.this,"Account Invalid!",Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(LoginActivity.this,"Login Invalid!",Toast.LENGTH_SHORT).show();
                                             }
                                         }catch(IOException e){
                                             e.printStackTrace();
@@ -93,7 +93,6 @@ public class LoginActivity extends AppCompatActivity {
             String inputId = editId.getText().toString();
             String inputPassword = editPassword.getText().toString();
 
-            inputPassword = SHA256(inputPassword);
 
             for (int i=0; i < accountArray.length(); i++){
                 JSONObject accountObject = accountArray.getJSONObject(i);
@@ -111,19 +110,5 @@ public class LoginActivity extends AppCompatActivity {
             e.printStackTrace();
             return false;
         }
-    }
-
-    public static String SHA256 (String text) throws NoSuchAlgorithmException {
-        MessageDigest md = MessageDigest.getInstance("SHA-256");
-        byte[] hash = md.digest(text.getBytes(StandardCharsets.UTF_8));
-
-        BigInteger number = new BigInteger(1, hash);
-
-        StringBuilder hexString = new StringBuilder(number.toString(16));
-        while (hexString.length() < 32)
-        {
-            hexString.insert(0, '0');
-        }
-        return hexString.toString();
     }
 }
