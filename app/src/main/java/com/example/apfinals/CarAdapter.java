@@ -60,10 +60,10 @@ public class CarAdapter extends ArrayAdapter {
 
         holder.tvModel.setText(model.getModel());
         holder.tvVariant.setText(model.getVariant());
-        holder.tvPricePM.setText(Double.toString(model.getPricePm()));
-        holder.tvPriceEM.setText(Double.toString(model.getPriceEm()));
-        holder.tvPriceLabuan.setText(Double.toString(model.getPriceLabuan()));
-        holder.tvPriceLangkawi.setText(Double.toString(model.getPriceLangkawi()));
+        holder.tvPricePM.setText(model.getPricePm());
+        holder.tvPriceEM.setText(model.getPriceEm());
+        holder.tvPriceLabuan.setText(model.getPriceLabuan());
+        holder.tvPriceLangkawi.setText(model.getPriceLangkawi());
 
         return v;
     }

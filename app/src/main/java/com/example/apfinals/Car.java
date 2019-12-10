@@ -4,10 +4,10 @@ public class Car {
     private String brand;
     private String model;
     private String variant;
-    private double pricePm;
-    private double priceEm;
-    private double priceLabuan;
-    private double priceLangkawi;
+    private String pricePm;
+    private String priceEm;
+    private String priceLabuan;
+    private String priceLangkawi;
 
     public String getBrand(){
         return brand;
@@ -33,35 +33,35 @@ public class Car {
         this.variant = variant;
     }
 
-    public double getPricePm(){
+    public String getPricePm(){
         return pricePm;
     }
 
-    public void setPricePm(double pricePm){
+    public void setPricePm(String pricePm){
         this.pricePm = pricePm;
     }
 
-    public double getPriceEm(){
+    public String getPriceEm(){
         return priceEm;
     }
 
-    public void setPriceEm(double priceEm){
+    public void setPriceEm(String priceEm){
         this.priceEm = priceEm;
     }
 
-    public double getPriceLabuan(){
+    public String getPriceLabuan(){
         return priceLabuan;
     }
 
-    public void setPriceLabuan(double priceLabuan){
+    public void setPriceLabuan(String priceLabuan){
         this.priceLabuan = priceLabuan;
     }
 
-    public double getPriceLangkawi(){
+    public String getPriceLangkawi(){
         return priceLangkawi;
     }
 
-    public void setPriceLangkawi(double priceLangkawi){
+    public void setPriceLangkawi(String priceLangkawi){
         this.priceLangkawi = priceLangkawi;
     }
 }

@@ -100,10 +100,10 @@ public class CarListActivity extends AppCompatActivity {
                         model.setBrand(singleObject.getString("brand"));
                         model.setModel(singleObject.getString("model"));
                         model.setVariant(singleObject.getString("variant"));
-                        model.setPricePm(singleObject.getDouble("pricePM"));
-                        model.setPriceEm(singleObject.getDouble("priceEM"));
-                        model.setPriceLabuan(singleObject.getDouble("priceLabuan"));
-                        model.setPriceLangkawi(singleObject.getDouble("priceLangkawi"));
+                        model.setPricePm(singleObject.getString("pricePM"));
+                        model.setPriceEm(singleObject.getString("priceEM"));
+                        model.setPriceLabuan(singleObject.getString("priceLabuan"));
+                        model.setPriceLangkawi(singleObject.getString("priceLangkawi"));
 
                         data.add(model);
                     }

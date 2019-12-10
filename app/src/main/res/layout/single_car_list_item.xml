@@ -18,7 +18,7 @@
         android:orientation="horizontal"
         android:layout_marginTop="15dp">
         <TextView
-            android:id="@+id/tv_x70"
+            android:id="@+id/tv_model"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -28,7 +28,7 @@
             android:textStyle="bold"/>
 
         <ImageView
-            android:id="@+id/img_x70"
+            android:id="@+id/img_model"
             android:layout_width="wrap_content"
             android:layout_height="75dp"
             android:src="@drawable/x70"/>
