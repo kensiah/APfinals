@@ -21,16 +21,6 @@ public class CarListActivity extends AppCompatActivity {
     private ListView listView;
     private ArrayList<Car> data = new ArrayList<>();
 
-    public static String AssetJSONFile (String filename, Context context) throws IOException {
-        AssetManager manager = context.getAssets();
-        InputStream file = manager.open(filename);
-        byte[] formArray = new byte[file.available()];
-        file.read(formArray);
-        file.close();
-
-        return new String(formArray);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +52,7 @@ public class CarListActivity extends AppCompatActivity {
                 hashMap.put("priceLabuan", Double.toString(priceLabuan));
                 hashMap.put("priceLangkawi", Double.toString(priceLangkawi));
 
-                carList.add(hashMap);
+                data.add(hashMap);
             }
         } catch (JSONException e) {
             e.printStackTrace();
