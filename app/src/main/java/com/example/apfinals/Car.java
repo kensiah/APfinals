@@ -1,5 +1,7 @@
 package com.example.apfinals;
 
+import android.graphics.drawable.Drawable;
+
 public class Car {
     private String brand;
     private String model;
@@ -8,6 +10,15 @@ public class Car {
     private String priceEm;
     private String priceLabuan;
     private String priceLangkawi;
+    private Drawable picture;
+
+    public Drawable getPicture() {
+        return picture;
+    }
+
+    public void setPicture(Drawable picture) {
+        this.picture = picture;
+    }
 
     public String getBrand(){
         return brand;

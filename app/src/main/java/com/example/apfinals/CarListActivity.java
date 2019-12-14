@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 
@@ -53,15 +54,11 @@ public class CarListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Car selectedItem = (Car) listView.getAdapter().getItem(position);
+                String model = selectedItem.getModel();
+                Drawable image = selectedItem.getPicture();
 
-                Intent i = new Intent(CarListActivity.this,CarDetailActivity.class);
-                i.putExtra("brand",selectedItem.getBrand());
-                i.putExtra("model",selectedItem.getModel());
-                i.putExtra("variant",selectedItem.getVariant());
-                i.putExtra("pricePM",selectedItem.getPricePm());
-                i.putExtra("priceEM",selectedItem.getPriceEm());
-                i.putExtra("priceLabuan",selectedItem.getPriceLabuan());
-                i.putExtra("priceLangkawi",selectedItem.getPriceLangkawi());
+                Intent i = new Intent(CarListActivity.this, CarVariantActivity.class);
+                i.putExtra("model",model);
                 startActivity(i);
             }
         });
@@ -97,13 +94,33 @@ public class CarListActivity extends AppCompatActivity {
                         JSONObject singleObject = dataArray.getJSONObject(i);
 
                         Car model = new Car();
+                        String modelName = singleObject.getString("model");
                         model.setBrand(singleObject.getString("brand"));
-                        model.setModel(singleObject.getString("model"));
-                        model.setVariant(singleObject.getString("variant"));
-                        model.setPricePm(singleObject.getString("pricePM"));
-                        model.setPriceEm(singleObject.getString("priceEM"));
-                        model.setPriceLabuan(singleObject.getString("priceLabuan"));
-                        model.setPriceLangkawi(singleObject.getString("priceLangkawi"));
+                        model.setModel(modelName);
+
+                        switch(modelName.toUpperCase()){
+                            case "X70":
+                                model.setPicture(getDrawable(R.drawable.x70));
+                                break;
+                            case "SAGA":
+                                model.setPicture(getDrawable(R.drawable.saga));
+                                break;
+                            case "PERSONA":
+                                model.setPicture(getDrawable(R.drawable.persona));
+                                break;
+                            case "IRIZ":
+                                model.setPicture(getDrawable(R.drawable.iriz));
+                                break;
+                            case "EXORA":
+                                model.setPicture(getDrawable(R.drawable.exora));
+                                break;
+                            case "PERDANA":
+                                model.setPicture(getDrawable(R.drawable.perdana));
+                                break;
+                            case "PREVE":
+                                model.setPicture(getDrawable(R.drawable.preve));
+                                break;
+                        }
 
                         data.add(model);
                     }

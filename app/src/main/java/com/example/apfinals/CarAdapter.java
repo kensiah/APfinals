@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -43,11 +44,7 @@ public class CarAdapter extends ArrayAdapter {
             v = LayoutInflater.from(context).inflate(R.layout.single_car_list_item,null);
 
             holder.tvModel = v.findViewById(R.id.tv_model);
-            holder.tvVariant = v.findViewById(R.id.tv_variant);
-            holder.tvPricePM = v.findViewById(R.id.tv_pricePM);
-            holder.tvPriceEM = v.findViewById(R.id.tv_priceEM);
-            holder.tvPriceLabuan = v.findViewById(R.id.tv_priceLabuan);
-            holder.tvPriceLangkawi = v.findViewById(R.id.tv_priceLangkawi);
+            holder.imageModel = v.findViewById(R.id.img_model);
 
             v.setTag(holder);
 
@@ -59,16 +56,13 @@ public class CarAdapter extends ArrayAdapter {
         Car model = (Car) getItem(position);
 
         holder.tvModel.setText(model.getModel());
-        holder.tvVariant.setText(model.getVariant());
-        holder.tvPricePM.setText(model.getPricePm());
-        holder.tvPriceEM.setText(model.getPriceEm());
-        holder.tvPriceLabuan.setText(model.getPriceLabuan());
-        holder.tvPriceLangkawi.setText(model.getPriceLangkawi());
+        holder.imageModel.setImageDrawable(model.getPicture());
 
         return v;
     }
 
     class ViewHolder{
-        TextView tvModel, tvVariant, tvPricePM,tvPriceEM,tvPriceLabuan,tvPriceLangkawi;
+        TextView tvModel;
+        ImageView imageModel;
     }
 }
