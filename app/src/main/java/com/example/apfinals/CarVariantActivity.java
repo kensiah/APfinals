@@ -2,6 +2,7 @@ package com.example.apfinals;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -36,6 +37,30 @@ public class CarVariantActivity extends AppCompatActivity {
         switch(model.toUpperCase()){
             case "X70":
                 imageView.setImageDrawable(getDrawable(R.drawable.x70));
+                break;
+
+            case "SAGA":
+                imageView.setImageDrawable(getDrawable(R.drawable.saga));
+                break;
+
+            case "PERSONA":
+                imageView.setImageDrawable(getDrawable(R.drawable.persona));
+                break;
+
+            case "PERDANA":
+                imageView.setImageDrawable(getDrawable(R.drawable.perdana));
+                break;
+
+            case "EXORA":
+                imageView.setImageDrawable(getDrawable(R.drawable.exora));
+                break;
+
+            case "IRIZ":
+                imageView.setImageDrawable(getDrawable(R.drawable.iriz));
+                break;
+
+            case "PREVE":
+                imageView.setImageDrawable(getDrawable(R.drawable.preve));
                 break;
         }
 

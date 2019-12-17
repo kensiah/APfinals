@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 
@@ -55,7 +56,6 @@ public class CarListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Car selectedItem = (Car) listView.getAdapter().getItem(position);
                 String model = selectedItem.getModel();
-                Drawable image = selectedItem.getPicture();
 
                 Intent i = new Intent(CarListActivity.this, CarVariantActivity.class);
                 i.putExtra("model",model);
