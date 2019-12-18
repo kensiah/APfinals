@@ -75,7 +75,7 @@ public class CarListActivity extends AppCompatActivity {
     }
 
     private void getDataFromAPI(){
-        Request request = new Request.Builder().url("https://api.myjson.com/bins/13e1kk").build();
+        Request request = new Request.Builder().url("https://api.myjson.com/bins/1c6q6s").build();
 
         okHttpClient.newCall(request).enqueue(new Callback(){
             @Override

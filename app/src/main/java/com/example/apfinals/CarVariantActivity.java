@@ -2,33 +2,66 @@ package com.example.apfinals;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import org.jetbrains.annotations.NotNull;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 
 public class CarVariantActivity extends AppCompatActivity {
     private TextView tvModel;
     private ImageView imageView;
     private ListView listView;
+    private ArrayList<Car> data = new ArrayList<>();
+    private OkHttpClient okHttpClient = new OkHttpClient();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_car_variants);
-        findViews();
-        initialData();
+        getDataFromAPI();
     }
 
     private void findViews(){
         tvModel = findViewById(R.id.tv_model);
         imageView = findViewById(R.id.img_model);
         listView = findViewById(R.id.list_item);
+        CarAdapter adapter = new CarAdapter(this,data);
+        listView.setAdapter(adapter);
     }
 
-    private void initialData(){
+    private void setListeners(){
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Car selectedItem = (Car) listView.getAdapter().getItem(position);
+                String model = selectedItem.getModel();
+
+                Intent i = new Intent(CarVariantActivity.this, CarPriceActivity.class);
+                i.putExtra("model",model);
+                startActivity(i);
+            }
+        });
+    }
+
+    private void initialize(){
         Bundle bundle = getIntent().getExtras();
 
         String model = bundle.getString("model");
@@ -63,6 +96,75 @@ public class CarVariantActivity extends AppCompatActivity {
                 imageView.setImageDrawable(getDrawable(R.drawable.preve));
                 break;
         }
+        findViews();
+        setListeners();
+    }
 
+    private void getDataFromAPI(){
+        Request request = new Request.Builder().url("https://api.myjson.com/bins/1c6q6s").build();
+
+        okHttpClient.newCall(request).enqueue(new Callback(){
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                try {
+                    JSONObject dataObject = new JSONObject(response.body().string());
+
+                    JSONArray dataArray = dataObject.getJSONArray("cars");
+                    JSONArray variantArray = dataObject.getJSONArray("variant");
+                    JSONArray pricePMArray = dataObject.getJSONArray("pricePM");
+                    JSONArray priceEMArray = dataObject.getJSONArray("priceEM");
+                    JSONArray priceLabuanArray = dataObject.getJSONArray("priceLabuan");
+                    JSONArray priceLangkawiArray = dataObject.getJSONArray("priceLangkawi");
+
+                    for(int i =0; i < dataArray.length(); i++){
+                        JSONObject singleObject = dataArray.getJSONObject(i);
+                        JSONObject singleVariant = variantArray.getJSONObject(i);
+                        JSONObject pricePM = pricePMArray.getJSONObject(i);
+                        JSONObject priceEM = priceEMArray.getJSONObject(i);
+                        JSONObject priceLabuan = priceLabuanArray.getJSONObject(i);
+                        JSONObject priceLangkawi = priceLangkawiArray.getJSONObject(i);
+
+                        Car model = new Car();
+                        String modelName = singleObject.getString("model");
+                        model.setBrand(singleObject.getString("brand"));
+                        model.setModel(modelName);
+
+                        switch(modelName.toUpperCase()){
+                            case "X70":
+                                model.setPicture(getDrawable(R.drawable.x70));
+                                break;
+                            case "SAGA":
+                                model.setPicture(getDrawable(R.drawable.saga));
+                                break;
+                            case "PERSONA":
+                                model.setPicture(getDrawable(R.drawable.persona));
+                                break;
+                            case "IRIZ":
+                                model.setPicture(getDrawable(R.drawable.iriz));
+                                break;
+                            case "EXORA":
+                                model.setPicture(getDrawable(R.drawable.exora));
+                                break;
+                            case "PERDANA":
+                                model.setPicture(getDrawable(R.drawable.perdana));
+                                break;
+                            case "PREVE":
+                                model.setPicture(getDrawable(R.drawable.preve));
+                                break;
+                        }
+
+                        data.add(model);
+                    }
+                    initialize();
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }
