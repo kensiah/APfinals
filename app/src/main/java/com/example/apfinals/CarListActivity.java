@@ -121,7 +121,6 @@ public class CarListActivity extends AppCompatActivity {
                                 model.setPicture(getDrawable(R.drawable.preve));
                                 break;
                         }
-
                         data.add(model);
                     }
                     initialize();

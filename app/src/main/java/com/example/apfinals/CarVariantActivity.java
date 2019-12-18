@@ -53,9 +53,10 @@ public class CarVariantActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Car selectedItem = (Car) listView.getAdapter().getItem(position);
                 String model = selectedItem.getModel();
-
+                String variant = selectedItem.getVariant();
                 Intent i = new Intent(CarVariantActivity.this, CarPriceActivity.class);
                 i.putExtra("model",model);
+                i.putExtra("variant",variant);
                 startActivity(i);
             }
         });
@@ -115,49 +116,15 @@ public class CarVariantActivity extends AppCompatActivity {
                     JSONObject dataObject = new JSONObject(response.body().string());
 
                     JSONArray dataArray = dataObject.getJSONArray("cars");
-                    JSONArray variantArray = dataObject.getJSONArray("variant");
-                    JSONArray pricePMArray = dataObject.getJSONArray("pricePM");
-                    JSONArray priceEMArray = dataObject.getJSONArray("priceEM");
-                    JSONArray priceLabuanArray = dataObject.getJSONArray("priceLabuan");
-                    JSONArray priceLangkawiArray = dataObject.getJSONArray("priceLangkawi");
 
                     for(int i =0; i < dataArray.length(); i++){
                         JSONObject singleObject = dataArray.getJSONObject(i);
-                        JSONObject singleVariant = variantArray.getJSONObject(i);
-                        JSONObject pricePM = pricePMArray.getJSONObject(i);
-                        JSONObject priceEM = priceEMArray.getJSONObject(i);
-                        JSONObject priceLabuan = priceLabuanArray.getJSONObject(i);
-                        JSONObject priceLangkawi = priceLangkawiArray.getJSONObject(i);
-
                         Car model = new Car();
                         String modelName = singleObject.getString("model");
+                        String variantName = singleObject.getString("variant");
                         model.setBrand(singleObject.getString("brand"));
                         model.setModel(modelName);
-
-                        switch(modelName.toUpperCase()){
-                            case "X70":
-                                model.setPicture(getDrawable(R.drawable.x70));
-                                break;
-                            case "SAGA":
-                                model.setPicture(getDrawable(R.drawable.saga));
-                                break;
-                            case "PERSONA":
-                                model.setPicture(getDrawable(R.drawable.persona));
-                                break;
-                            case "IRIZ":
-                                model.setPicture(getDrawable(R.drawable.iriz));
-                                break;
-                            case "EXORA":
-                                model.setPicture(getDrawable(R.drawable.exora));
-                                break;
-                            case "PERDANA":
-                                model.setPicture(getDrawable(R.drawable.perdana));
-                                break;
-                            case "PREVE":
-                                model.setPicture(getDrawable(R.drawable.preve));
-                                break;
-                        }
-
+                        model.setVariant(variantName);
                         data.add(model);
                     }
                     initialize();
